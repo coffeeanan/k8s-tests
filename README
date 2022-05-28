@@ -1,0 +1,63 @@
+eksctl create cluster \
+    --name stage-blue \
+    --version 1.22 \
+    --without-nodegroup \
+    --with-oidc \
+    --region eu-west-1
+
+
+
+# Create Cluster
+eksctl create cluster --name=testing-1 \
+                      --region=eu-west-1 \
+                      --zones=eu-west-1a,eu-west-1b, eu-west-1c \
+                      --without-nodegroup 
+
+# Get List of clusters
+eksctl get clusters                  
+
+
+
+# Template
+eksctl utils associate-iam-oidc-provider \
+    --region region-code \
+    --cluster <cluter-name> \
+    --approve
+
+# Replace with region & cluster name
+eksctl utils associate-iam-oidc-provider \
+    --region us-east-1 \
+    --cluster eksdemo1 \
+    --approve
+
+
+
+# Create Public Node Group   
+eksctl create nodegroup --cluster=eksdemo1 \
+                        --region=us-east-1 \
+                        --name=eksdemo1-ng-public1 \
+                        --node-type=t3.medium \
+                        --nodes=2 \
+                        --nodes-min=2 \
+                        --nodes-max=4 \
+                        --node-volume-size=20 \
+                        --ssh-access \
+                        --ssh-public-key=kube-demo \
+                        --managed \
+                        --asg-access \
+                        --external-dns-access \
+                        --full-ecr-access \
+                        --appmesh-access \
+                        --alb-ingress-access 
+
+
+eksctl create nodegroup \
+  --cluster my-cluster \
+  --region region-code \
+  --name my-mng \
+  --node-type m5.large \
+  --nodes 3 \
+  --nodes-min 2 \
+  --nodes-max 4 \
+  --ssh-access \
+  --ssh-public-key my-key

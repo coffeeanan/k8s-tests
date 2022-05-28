@@ -1,0 +1,21 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: eks-priv-testing-1
+  region: eu-west-1
+
+vpc:
+  subnets:
+    private:
+      eu-west-1a: { id: subnet-095c3614c9043b143 }
+      eu-west-1b: { id: subnet-03db53a5d23d3e4fc }
+      eu-west-1c: { id: subnet-02ca080c9ab067028 }
+
+# nodeGroups:
+#   - name: ng-1
+#     instanceType: m5.large
+#     desiredCapacity: 2
+#     volumeSize: 20
+#     ssh:
+#       allow: true # will use ~/.ssh/id_rsa.pub as the default ssh key

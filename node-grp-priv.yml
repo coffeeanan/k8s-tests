@@ -1,0 +1,19 @@
+# A simple example of ClusterConfig object with two nodegroups:
+---
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: eks-priv-testing-1
+  region: eu-west-1
+
+nodeGroups:
+  - name: nodegroup-priv-1
+    instanceType: t3.medium
+    desiredCapacity: 3
+    ssh:
+      allow: true
+    subnets:
+      - subnet-095c3614c9043b143
+      - subnet-03db53a5d23d3e4fc
+      - subnet-02ca080c9ab067028
